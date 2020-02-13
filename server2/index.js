@@ -2,23 +2,37 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 
-const getPing = async () => {
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const sendData = {
+  data: "pong",
+  port: "5372"
+};
+
+const postPong = async () => {
   try {
-    return await axios.get('http://127.0.0.1:4567/');
+    return await axios.post('http://127.0.0.1:8080/', sendData);
   } catch (error) {
     console.error(error);
   }
 };
 
 app.get('/', function (req, res) {
-  getPing().then(function (result) {
-    console.log(result.data.data);
-    return result.data.data;
+  postPong().then(function (result) {
+    console.log(result.data);
+    return result.data;
   });
 
-  res.json({
-    data: "pong"
-  })
+  res.json(sendData);
+});
+
+app.post('/', function (req, res) {
+   console.log(req.body.data);
+  postPong().then(function (result) {
+    console.log(result.data);
+    return result.data;
+  });
 });
 
 app.listen(5372, function () {
