@@ -12,7 +12,7 @@ const httpPort = {
 
 const postMessage = async (port, body) => {
   try {
-    return await axios.post('http://127.0.0.1:' + port, body);
+    return await axios.post('http://172.17.0.1:' + port, body);
   } catch (error) {
     console.error(error);
   }

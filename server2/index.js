@@ -12,7 +12,7 @@ const sendData = {
 
 const postPong = async () => {
   try {
-    return await axios.post('http://127.0.0.1:8080/', sendData);
+    return await axios.post('http://172.17.0.1:8080/', sendData);
   } catch (error) {
     console.error(error);
   }
